@@ -26,8 +26,8 @@ public class MedicoController {
 
     @GetMapping
     //Pageable é um tipo de objeto do Spring que permite organizar as informações (paginar)
-    public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
-        return repository.findAll(paginacao).map(DadosListagemMedico::new);
+    public Page<DadosListagemMedico> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
+        return repository.findAllByStatusTrue(paginacao).map(DadosListagemMedico::new);
     }
 
     @PutMapping
@@ -37,4 +37,19 @@ public class MedicoController {
         medico.atualizarInformacaoes(dados);
     }
 
+    //o código abaixo realiza uma exclusão permanente: ATENÇÃO - PERDA DE DADOS PERMANENTE!
+//    //parâmetro dinâmico que chegará na URL da requisição, no caso, o id
+//    @DeleteMapping("/{id}")
+//    @Transactional
+//    public void excluir(@PathVariable Long id) {
+//        repository.deleteById(id);
+//    }
+
+    //Exclusão lógica: apenas torna o dado "inativo"
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+        var medico = repository.getReferenceById(id);
+        medico.excluir();
+    }
 }

@@ -26,7 +26,10 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
+    private Boolean status;
+
     public Medico(DadosCadastroMedico dados) {
+        this.status = true;
         this.nome=dados.nome();
         this.email= dados.email();
         this.crm= dados.crm();
@@ -47,5 +50,9 @@ public class Medico {
         }
 
 
+    }
+
+    public void excluir() {
+        this.status = false;
     }
 }
