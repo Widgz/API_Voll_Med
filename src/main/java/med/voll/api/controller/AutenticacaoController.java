@@ -18,7 +18,7 @@ public class AutenticacaoController {
     @Autowired // Injeta automaticamente uma instância de AuthenticationManager
     private AuthenticationManager manager;
 
-    @PostMapping // Indica que este método responde a requisições HTTP POST
+    @PostMapping // Indica que este metodo responde a requisições HTTP POST
     public ResponseEntity efetuarLogin (@RequestBody @Valid DadosAutenticacao dados) {
         // Cria um objeto de autenticação com as credenciais enviadas na requisição
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
