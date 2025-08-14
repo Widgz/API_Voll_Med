@@ -17,7 +17,7 @@ import java.util.Date;
 public class TokenService {
 
     // Realiza a leitura da propriedade definida no arquivo aplication.properties
-    @Value("{api.security.token.security}")
+    @Value("${api.security.token.secret}")
     private String secret;
 
     // Metodo público para gerar um token JWT para um usuário específico
