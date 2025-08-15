@@ -32,6 +32,9 @@ public class SecurityConfigurations {
                         .authorizeHttpRequests(req -> {
                             //permite requisições para a URL /login mesmo que o usuário nao esteja logado
                             req.requestMatchers("/login").permitAll();
+                            //os astericos duplos indicam que qualquer subendereco esta sendo considerado
+                            //liberacao das URLs para implementacao do SpringDoc
+                            req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                             //para as demais requisições o usuario deve estar logado
                             req.anyRequest().authenticated();
                         })
